@@ -1,56 +1,9 @@
-// import './App.css';
-// import { a, b } from './components/Products/Products';
-// import Products from './components/Products/Products';
-// import { useState } from 'react';
-// function App() {
-
-//   const [cart,setCart] = useState();
-
-//   function increase(product){
-//     const newCart = { ...cart };
-//     if(newCart[product.id]){
-//       newCart[product.id].qty++;
-//     }
-//     else{
-//       newCart[product.id] = {
-//         id: product.id,
-//         title: product.title,
-//         price: product.price,
-//         qty: 1
-//       }
-//     }
-//     setCart(newCart);
-//   }
-
-//   function decrease(product){
-//     const newCart = { ...cart };
-//     if(newCart[product.id]){
-//       if(newCart[product.id].qty==1) {
-//         delete newCart[product.id];
-//       }
-//       else newCart[product.id].qty--;
-//     }
-//     setCart(newCart);
-//   }
-
-//   console.log(a, b);
-//   return (
-//     <div className="App">
-//     <Products cart={cart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
-//   </div>
-// );
-// }
-
-// export default App;
-
 import './App.css';
 import { a, b } from './components/Products/Products';
 import Products from './components/Products/Products';
 import { useState } from 'react';
+import CartContext from './context/CartContext';
 function App() {
-  // state variable
-  // inc
-  // dec
   let [cart, setCart] = useState({});
   function increaseQuantity(product) {
     const newCart = { ...cart };
@@ -78,9 +31,11 @@ function App() {
 
   console.log(a, b);
   return (
-    <div className="App">
+    <CartContext.Provider value={{cart,increaseQuantity,decreaseQuantity}}>
+      <div className="App">
       <Products cart={cart} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} />
-    </div>
+      </div>
+    </CartContext.Provider>
   );
 }
 
